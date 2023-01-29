@@ -116,7 +116,7 @@ export const HoppersList = () => {
         <Flex>
           <Box>
             <Heading as="h1" size="lg" className="mb-6" color="text">
-              {months[currentDate.month]} {currentDate.year}
+              {months[currentDate.month as string]} {currentDate.year}
             </Heading>
           </Box>
           <Spacer />

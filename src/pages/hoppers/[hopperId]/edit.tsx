@@ -1,16 +1,13 @@
 import { Suspense } from "react"
 import { Routes } from "@blitzjs/next"
 import Head from "next/head"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import { useQuery, useMutation } from "@blitzjs/rpc"
 import { useParam } from "@blitzjs/next"
 import Layout from "src/core/layouts/Layout"
 import getHopper from "src/hoppers/queries/getHopper"
 import updateHopper from "src/hoppers/mutations/updateHopper"
-import createPayment from "src/payments/mutations/createPayment"
 import { HopperForm, FORM_ERROR } from "src/hoppers/components/HopperForm"
-import { PaymentForm } from "src/hoppers/components/PaymentForm"
 
 export const EditHopper = () => {
   const router = useRouter()
@@ -36,10 +33,10 @@ export const EditHopper = () => {
           initialValues={hopper}
           onSubmit={async (values) => {
             try {
-              const updated = await updateHopperMutation({
+              const updated = (await updateHopperMutation({
                 id: hopper.id,
                 ...values,
-              })
+              })) as any
               await setQueryData(updated)
               await router.push(Routes.ShowHopperPage({ hopperId: updated.id }))
             } catch (error: any) {

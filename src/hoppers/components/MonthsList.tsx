@@ -19,7 +19,7 @@ export function MonthsList({ payments }: any) {
   return (
     <div>
       {payments.map((payment) => (
-        <Tag className="mr-4 mb-4" size="lg" variant="solid" colorScheme="teal">{`${
+        <Tag key={payment.id} className="mr-4 mb-4" size="lg" variant="solid" colorScheme="teal">{`${
           months[payment.month]
         } ${payment.year}`}</Tag>
       ))}
