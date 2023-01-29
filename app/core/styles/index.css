@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .hero {
+    @apply w-full text-[#333];
+  }
+}
+
+.title {
+  @apply m-0 w-full pt-20;
+  font-size: 48px;
+}
+
+.title,
+.description {
+  @apply text-center;
+}
+
+.react-datepicker {
+  width: 100%;
+}
+
+.react-datepicker__month-container {
+  width: 100%;
+}
+
+.react-datepicker__navigation {
+  color: black;
+}
+
+.react-datepicker__header {
+  background: none;
+}
+
+.react-datepicker__month-wrapper {
+  padding: 4px;
+}
+
+.react-datepicker__month-text {
+  padding: 4px;
+  font-size: 16px;
+  width: auto !important;
+}
+
+.react-datepicker__month-text:first-letter {
+  text-transform: uppercase;
+}
+
+.react-datepicker__navigation {
+  top: 10px;
+}

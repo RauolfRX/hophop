@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int       @id @default(autoincrement())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  name           String?
+  email          String    @unique
+  hashedPassword String?
+  role           String    @default("USER")
+  sessions       Session[]
+  tokens         Token[]
+}
+
+model Session {
+  id                 Int       @id @default(autoincrement())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  expiresAt          DateTime?
+  handle             String    @unique
+  hashedSessionToken String?
+  antiCSRFToken      String?
+  publicData         String?
+  privateData        String?
+  userId             Int?
+  user               User?     @relation(fields: [userId], references: [id])
+}
+
+model Token {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  hashedToken String
+  type        String
+  expiresAt   DateTime
+  sentTo      String
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@unique([hashedToken, type])
+}
+
+model Hopper {
+  id        Int         @id @default(autoincrement())
+  name      String
+  info      String
+  Payment   Payment[]
+  Insurance Insurance[]
+}
+
+model Payment {
+  id       Int     @id @default(autoincrement())
+  hopperId Int
+  month    String
+  year     String
+  payed    Boolean
+  hopper   Hopper  @relation(fields: [hopperId], references: [id])
+}
+
+model Insurance {
+  id       Int    @id @default(autoincrement())
+  hopperId Int
+  year     String
+  hopper   Hopper @relation(fields: [hopperId], references: [id])
+}

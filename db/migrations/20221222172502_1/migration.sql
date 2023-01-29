@@ -1,0 +1,15 @@
+-- CreateTable
+CREATE TABLE "Hopper" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "info" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Payment" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "hopperId" INTEGER NOT NULL,
+    "month" INTEGER NOT NULL,
+    "year" INTEGER NOT NULL,
+    CONSTRAINT "Payment_hopperId_fkey" FOREIGN KEY ("hopperId") REFERENCES "Hopper" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
